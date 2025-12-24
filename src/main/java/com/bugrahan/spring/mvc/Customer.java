@@ -1,9 +1,6 @@
 package com.bugrahan.spring.mvc;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class Customer {
 
@@ -15,15 +12,27 @@ public class Customer {
 
     @Min(value = 0,message = "MUST BE GREATER THAN OR EQUAL TO 0")
     @Max(value = 10,message = "MUST BE LESS THAN OR EQUAL TO 10")
-    private int freePasses;
+    @NotNull(message = " İS REQUİRED BOŞ GEÇİLEMEZ")
+    private Integer freePasses;
 
+    @NotNull(message = " İS REQUİRED BOŞ GEÇİLEMEZ")
+    @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 chars/digits")
+    private String postalCode ;
 
+    public String getPostalCode(){
+        return this.postalCode;
+    }
 
-    public int getFreePasses() {
+    public void setPostalCode(String postalCode){
+        this.postalCode=postalCode;
+    }
+
+    // EĞER İNT KULLANILSAYDI DEFAULT DEĞER 0 OLACAĞINDAN HATA ALACKTIK
+    public Integer getFreePasses() {
         return freePasses;
     }
 
-    public void setFreePasses(int freePasses) {
+    public void setFreePasses(Integer freePasses) {
         this.freePasses = freePasses;
     }
 
